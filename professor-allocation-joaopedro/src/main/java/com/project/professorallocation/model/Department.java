@@ -9,25 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "department")
-public class Department {	
+public class Department {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "name", length = 100, nullable = false)
-	private String nome;
-	
+	private String name;
 
 	public Department() {
 		super();
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public Long getId() {
@@ -38,9 +29,16 @@ public class Department {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Department [nome=" + nome + ", id=" + id + "]";
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", name=" + name + "]";
+	}
 }
