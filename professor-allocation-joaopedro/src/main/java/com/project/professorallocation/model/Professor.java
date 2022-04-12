@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +22,20 @@ public class Professor {
 	@Column(name = "cpf", length = 11, nullable = false, unique = true)
 	private String cpf;
 
+	@Column(name = "department_id", nullable = false)
 	private Long departmentId;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "department_id", nullable = false, insertable = false, updatable = false)
+	private Department deparment;
+
+	public Department getDeparment() {
+		return deparment;
+	}
+
+	public void setDeparment(Department deparment) {
+		this.deparment = deparment;
+	}
 
 	public Professor() {
 		super();
@@ -63,5 +78,4 @@ public class Professor {
 		return "Professor [id=" + id + ", name=" + name + ", cpf=" + cpf + ", departmentId=" + departmentId + "]";
 	}
 
-	
 }
