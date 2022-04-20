@@ -59,5 +59,11 @@ public class AllocationRepositoryTests {
 		
 	}
 	
+	@Test
+	public void deleteAll() {
+		
+		repository.deleteAllInBatch();
+	}
+	
 	
 }
