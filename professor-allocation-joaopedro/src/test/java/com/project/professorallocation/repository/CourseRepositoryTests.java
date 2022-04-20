@@ -39,7 +39,7 @@ public class CourseRepositoryTests {
 	public void create() {
 
 		Course courseBeingCreated = new Course();
-		courseBeingCreated.setName("Ciência da Computação");
+		courseBeingCreated.setName("Back-end");
 
 		courseBeingCreated = repository.save(courseBeingCreated);
 		System.out.println(courseBeingCreated);
