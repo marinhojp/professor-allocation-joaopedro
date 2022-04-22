@@ -33,5 +33,10 @@ public class AllocationServiceTests {
 		
 		allocation = service.create(allocation);
 	}
+	
+	@Test
+	public void update() {
+		
+	}
 
 }
