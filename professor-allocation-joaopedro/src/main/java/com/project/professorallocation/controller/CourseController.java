@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.professorallocation.model.Course;
 import com.project.professorallocation.service.CourseService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(path = "/courses")
 public class CourseController {
@@ -29,6 +31,7 @@ public class CourseController {
 		this.service = service;
 	}
 
+	@ApiOperation(value = "Find all courses")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Course>> findAll() {
@@ -38,6 +41,7 @@ public class CourseController {
 
 	}
 
+	@ApiOperation(value = "Finds course by Id")
 	@GetMapping(path = "/{course_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Course> findById(@PathVariable(name = "course_id") Long id) {
 		Course item = service.findById(id);
@@ -52,6 +56,7 @@ public class CourseController {
 
 	}
 
+	@ApiOperation(value = "Creates a course")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Course> create(@RequestBody Course course) {
@@ -61,6 +66,7 @@ public class CourseController {
 
 	}
 
+	@ApiOperation(value = "Updates a course")
 	@PutMapping(path = "/{course_id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Course> update(@PathVariable(name = "course_id") Long id, @RequestBody Course course) {
@@ -75,6 +81,7 @@ public class CourseController {
 		}
 	}
 
+	@ApiOperation(value = "Deletes a course")
 	@DeleteMapping(path = "/{course_id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> delete(@PathVariable(name = "course_id") Long id) {

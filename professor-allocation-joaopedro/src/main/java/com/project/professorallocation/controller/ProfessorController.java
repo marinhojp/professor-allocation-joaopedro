@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.professorallocation.model.Professor;
 import com.project.professorallocation.service.ProfessorService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(path = "/professors")
 public class ProfessorController {
@@ -29,6 +31,7 @@ public class ProfessorController {
 		this.service = serivce;
 	}
 
+	@ApiOperation(value = "Find all allocation")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Professor>> findAll() {
@@ -38,6 +41,7 @@ public class ProfessorController {
 
 	}
 
+	@ApiOperation(value = "Finds professor by Id")
 	@GetMapping(path = "/{prof_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Professor> findById(@PathVariable(name = "prof_id") Long id) {
 		Professor item = service.findById(id);
@@ -52,6 +56,7 @@ public class ProfessorController {
 
 	}
 
+	@ApiOperation(value = "Creates a professor")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Professor> create(@RequestBody Professor prof) {
@@ -61,6 +66,7 @@ public class ProfessorController {
 
 	}
 
+	@ApiOperation(value = "Updates a professor")
 	@PutMapping(path = "/{prof_id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Professor> update(@PathVariable(name = "prof_id") Long id, @RequestBody Professor prof) {
@@ -75,6 +81,7 @@ public class ProfessorController {
 		}
 	}
 
+	@ApiOperation(value = "Deletes a professor")
 	@DeleteMapping(path = "/{prof_id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> delete(@PathVariable(name = "prof_id") Long id) {

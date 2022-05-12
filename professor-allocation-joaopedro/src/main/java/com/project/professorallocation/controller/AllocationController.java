@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.professorallocation.model.Allocation;
 import com.project.professorallocation.service.AllocationService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(path = "/allocations")
 public class AllocationController {
@@ -29,6 +33,7 @@ public class AllocationController {
 		this.service = service;
 	}
 
+	@ApiOperation(value = "Find all allocations")
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Allocation>> findAll() {
@@ -36,7 +41,12 @@ public class AllocationController {
 
 		return new ResponseEntity<>(allAllocations, HttpStatus.OK);
 	}
-
+	
+	@ApiOperation(value = "Finds an allocation by Id")
+	@ApiResponses({
+		@ApiResponse( code = 200, message = "OK"),
+		@ApiResponse( code = 404, message = "NOT FOUND")
+	})
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<Allocation> findById(@PathVariable(name = "id") Long id) {
@@ -49,6 +59,7 @@ public class AllocationController {
 		}
 	}
 
+	@ApiOperation(value = "Finds an allocation by professor Id")
 	@GetMapping(path = "/professor/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Allocation>> findByProfessorId(@PathVariable(name = "id") Long id) {
@@ -56,6 +67,7 @@ public class AllocationController {
 		return new ResponseEntity<>(allAllocations, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "Finds an allocation by course Id")
 	@GetMapping(path = "/course/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<List<Allocation>> findByCourseId(@PathVariable(name = "id") Long id) {
@@ -64,6 +76,7 @@ public class AllocationController {
 
 	}
 
+	@ApiOperation(value = "Creates an allocation")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Allocation> create(@RequestBody Allocation allocation) {
@@ -75,6 +88,7 @@ public class AllocationController {
 		}
 	}
 
+	@ApiOperation(value = "Updates an allocation")
 	@PutMapping(path = "/{allocation_id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Allocation> update(@PathVariable(name = "allocation_id") Long id,
@@ -93,6 +107,7 @@ public class AllocationController {
 		}
 	}
 
+	@ApiOperation("Deletes an allocation")
 	@DeleteMapping(path = "/{allocation_id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> delete(@PathVariable(name = "allocation_id") Long id) {
